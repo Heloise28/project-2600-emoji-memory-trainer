@@ -8,8 +8,11 @@
     "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\"",
     
     "_comment2": "// 2. INSTALLATION SCRIPT (installs dependencies in both folders)",
-    "install-all": "npm install --prefix client && npm install --prefix server",
+    "install-all": "npm install && npm install --prefix client && npm install --prefix server",
    
+    "build": "cd client && npm run build",
+    "render-build":"npm install-all && npm run build",
+
     "_comment3": "// 3. DEPLOYMENT BUILD SCRIPT (Tells the hosting service to build the client)",
     "_comment4": "// NOTE: Many hosting services (like Render) look for this exact script name",
     "render-postbuild": "npm install --prefix client && npm run build --prefix client"
