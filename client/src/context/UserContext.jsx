@@ -52,8 +52,8 @@ export const UserProvider = ({ children }) => {
 
     // If logged in, fetch the specific user's data
     axios
-      .get(`https://project-2600-emoji-memory-trainer.onrender.com/api/user/${userId}`)
-      // .get(`http://localhost:5001/api/user/${userId}`)
+      // .get(`https://project-2600-emoji-memory-trainer.onrender.com/api/user/${userId}`)
+      .get(`http://localhost:5001/api/user/${userId}`)
       .then((response) => {
         // The savedNumbers array should be stored under the user object, 
         // similar to customMapping
@@ -83,8 +83,8 @@ export const UserProvider = ({ children }) => {
 
     console.log("Attempting to save new savedNumbers to server...");
     axios
-      .patch(`https://project-2600-emoji-memory-trainer.onrender.com/api/user/update_saved_numbers/${userId}`, {
-      // .patch(`http://localhost:5001/api/user/update_saved_numbers/${userId}`, {
+      // .patch(`https://project-2600-emoji-memory-trainer.onrender.com/api/user/update_saved_numbers/${userId}`, {
+      .patch(`http://localhost:5001/api/user/update_saved_numbers/${userId}`, {
         savedNumbers: newSavedNumbers
       })
       .then((response) => {
@@ -104,16 +104,16 @@ export const UserProvider = ({ children }) => {
   // Get user mapping from server and save to state/context, and localstorage
   function loadActiveMappnig(loggedInAs, loggedIn) {
     axios
-      .get('https://project-2600-emoji-memory-trainer.onrender.com/api/default_mapping')
-      // .get('http://localhost:5001/api/default_mapping')
+      // .get('https://project-2600-emoji-memory-trainer.onrender.com/api/default_mapping')
+      .get('http://localhost:5001/api/default_mapping')
       .then((response) => {
         const currentDefaultMapping = response.data.mapping;
         // console.log("Successfully fetched and set default mapping:", map);
         let updated = [...currentDefaultMapping];
         if (loggedIn) {
           axios
-            .get(`https://project-2600-emoji-memory-trainer.onrender.com/api/user/${loggedInAs}`)
-            // .get(`http://localhost:5001/api/user/${loggedInAs}`)
+            // .get(`https://project-2600-emoji-memory-trainer.onrender.com/api/user/${loggedInAs}`)
+            .get(`http://localhost:5001/api/user/${loggedInAs}`)
             .then((response) => {
               const custom = response.data.customMapping;
               for (let i = 0; i < custom.length; i++) {
@@ -141,8 +141,8 @@ export const UserProvider = ({ children }) => {
 
   function updateUserMapping(newPair) {
     axios
-      .get(`https://project-2600-emoji-memory-trainer.onrender.com/api/user/${userId}`)
-      // .get(`http://localhost:5001/api/user/${userId}`)
+      // .get(`https://project-2600-emoji-memory-trainer.onrender.com/api/user/${userId}`)
+      .get(`http://localhost:5001/api/user/${userId}`)
       .then((response) => {
         const toBeUpdated = response.data.customMapping;
         let added = false;
@@ -169,8 +169,8 @@ export const UserProvider = ({ children }) => {
           toBeUpdated.push(newPair);
         }
         axios
-          .patch(`https://project-2600-emoji-memory-trainer.onrender.com/api/user/update_mapping/${userId}`, {
-          // .patch(`http://localhost:5001/api/user/update_mapping/${userId}`, {
+          // .patch(`https://project-2600-emoji-memory-trainer.onrender.com/api/user/update_mapping/${userId}`, {
+          .patch(`http://localhost:5001/api/user/update_mapping/${userId}`, {
             customMapping: toBeUpdated
           })
           .then ((response) => {
