@@ -12,8 +12,8 @@ export default function LoginBox(props) {
   const createUser = () => {
     let newId = NaN;
     axios
-      // .get('https://project-2600-emoji-memory-trainer.onrender.com/api/next_user_id/')
-      .get('http://localhost:5001/api/next_user_id/')
+      .get('https://project-2600-emoji-memory-trainer.onrender.com/api/next_user_id/')
+      // .get('http://localhost:5001/api/next_user_id/')
       .then((response) => {
         // Here's different from get default mapping because 
         // default mapping collecttion has a name, but
@@ -23,8 +23,8 @@ export default function LoginBox(props) {
 
         // Increment next Id
         axios
-          // .patch('https://project-2600-emoji-memory-trainer.onrender.com/api/next_user_id/update/', {
-          .patch('http://localhost:5001/api/next_user_id/update/', {
+          .patch('https://project-2600-emoji-memory-trainer.onrender.com/api/next_user_id/update/', {
+          // .patch('http://localhost:5001/api/next_user_id/update/', {
             nextUserId: newId + 1
           })
           .then((response) => {
@@ -34,8 +34,8 @@ export default function LoginBox(props) {
         
         // Create and login as new user
         axios
-          // .put("https://project-2600-emoji-memory-trainer.onrender.com/api/user/create_user/", {
-          .put("http://localhost:5001/api/user/create_user/", {
+          .put("https://project-2600-emoji-memory-trainer.onrender.com/api/user/create_user/", {
+          // .put("http://localhost:5001/api/user/create_user/", {
             userId: newId + ""
           })
           .then((response) => {
@@ -57,8 +57,8 @@ export default function LoginBox(props) {
     // If I'm not creating new
     } else {
       axios
-        // .post('https://project-2600-emoji-memory-trainer.onrender.com/api/login/', {userId: inputId})
-        .post('http://localhost:5001/api/login/', {userId: inputId})
+        .post('https://project-2600-emoji-memory-trainer.onrender.com/api/login/', {userId: inputId})
+        // .post('http://localhost:5001/api/login/', {userId: inputId})
         .then((response) => {
           // Seems to not need it
           const res = response.data;
