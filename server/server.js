@@ -48,8 +48,16 @@ app.use('/api/login', loginRouter);
 // }
 
 if (process.env.NODE_ENV === 'production') {
+  // “When a browser requests static files (like /assets/main.js, /styles.css, /logo.png), look for them in client/dist.”
+  // dist is a folder that vite generate when I run build. also I think is react convention?
+  // dist has static files that brower asks for
     app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 
+    // If browser asks routes that's unknown to server (not in the above)
+    // (this part is related to single page app, which you can google)
+    // serve index.html and essentially let react handle it (where your client routing comes to play)
+    // in other words, it's express intercepting the browser request, and give browser index.html, instead of
+    // letting Render handle it, in which case you will see something like CANNOT GET which you have
     app.get('/{*splat}', (req, res) => {
         res.sendFile(path.resolve(__dirname, '..', 'client', 'dist', 'index.html'));
     });
